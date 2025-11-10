@@ -133,13 +133,14 @@ const Earth3DHiper: React.FC<{ size?: number }> = ({ size = 400 }) => {
     window.addEventListener('resize', handleResize)
 
     // === CLEANUP ===
+    const currentContainerRef = containerRef.current
     return () => {
       window.removeEventListener('resize', handleResize)
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
-      if (containerRef.current && renderer.domElement.parentNode) {
-        containerRef.current.removeChild(renderer.domElement)
+      if (currentContainerRef && renderer.domElement.parentNode) {
+        currentContainerRef.removeChild(renderer.domElement)
       }
       geometry.dispose()
       material.dispose()

@@ -118,6 +118,7 @@ export default function EarthInteractive({
     animate()
 
     // Cleanup
+    const currentMountRef = mountRef.current
     return () => {
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current)
@@ -126,8 +127,8 @@ export default function EarthInteractive({
       renderer.domElement.removeEventListener('pointerup', handlePointerUp)
       renderer.domElement.removeEventListener('pointermove', handlePointerMove)
       renderer.domElement.removeEventListener('wheel', handleWheel)
-      if (mountRef.current && renderer.domElement.parentNode) {
-        mountRef.current.removeChild(renderer.domElement)
+      if (currentMountRef && renderer.domElement.parentNode) {
+        currentMountRef.removeChild(renderer.domElement)
       }
       renderer.dispose()
     }

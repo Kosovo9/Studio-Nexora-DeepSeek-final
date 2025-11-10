@@ -119,13 +119,14 @@ export default function EarthViewer({
     window.addEventListener('resize', handleResize)
 
     // Limpia al ocultar
+    const currentMountRef = mountRef.current
     return () => {
       window.removeEventListener('resize', handleResize)
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current)
       }
-      if (mountRef.current && renderer.domElement.parentNode) {
-        mountRef.current.removeChild(renderer.domElement)
+      if (currentMountRef && renderer.domElement.parentNode) {
+        currentMountRef.removeChild(renderer.domElement)
       }
       renderer.dispose()
     }
