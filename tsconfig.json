@@ -43,6 +43,8 @@
     ".next",
     "out",
     "dist",
+    "app/sign-in/[[...sign-in]]",
+    "app/admin/chat",
     "**/*.spec.ts",
     "**/*.test.ts",
     "**/*.stories.tsx",
