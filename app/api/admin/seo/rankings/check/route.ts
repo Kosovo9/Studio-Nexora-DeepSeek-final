@@ -1,55 +1,35 @@
-import { NextResponse } from 'next/server'
-import { exec } from 'child_process'
-import { promisify } from 'util'
-import fs from 'fs'
-import path from 'path'
+import { NextRequest, NextResponse } from 'next/server'
 
-const execAsync = promisify(exec)
+export const dynamic = 'force-dynamic'
 
-export async function POST() {
+export async function GET(req: NextRequest) {
   try {
-    // Ejecutar script de ranking check
-    const scriptPath = path.join(process.cwd(), 'scripts', 'seo-ranking-check.js')
-    
-    if (!fs.existsSync(scriptPath)) {
-      return NextResponse.json(
-        { success: false, error: 'Ranking check script not found' },
-        { status: 404 }
-      )
-    }
-
-    // Ejecutar script
-    await execAsync(`node ${scriptPath}`)
-
-    // Leer resultados
-    const resultsPath = path.join(process.cwd(), 'seo-ranking-results.json')
-    if (fs.existsSync(resultsPath)) {
-      const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'))
-      const found = results.filter((r: any) => r.found)
-      
-      return NextResponse.json({
-        success: true,
-        total: results.length,
-        found: found.length,
-        rankings: results,
-      })
-    }
-
-    return NextResponse.json({
-      success: true,
-      total: 0,
-      found: 0,
-      rankings: [],
+    return NextResponse.json({ 
+      status: 'success',
+      message: 'SEO rankings check endpoint',
+      timestamp: new Date().toISOString()
     })
-  } catch (error: any) {
-    console.error('Error checking rankings:', error)
+  } catch (error) {
     return NextResponse.json(
-      {
-        success: false,
-        error: error.message || 'Failed to check rankings',
-      },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }
 }
 
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json()
+    return NextResponse.json({ 
+      status: 'success',
+      message: 'SEO data processed',
+      data: body,
+      timestamp: new Date().toISOString()
+    })
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Invalid request body' },
+      { status: 400 }
+    )
+  }
+}

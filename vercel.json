@@ -1,8 +1,34 @@
 {
+  "version": 2,
   "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
+  "outputDirectory": ".next",
   "installCommand": "npm install",
+  "devCommand": "npm run dev",
   "framework": "nextjs",
-  "regions": ["iad1"]
+  "functions": {
+    "app/api/**/*.ts": {
+      "maxDuration": 30,
+      "memory": 3008
+    }
+  },
+  "regions": ["iad1"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ]
 }
-
