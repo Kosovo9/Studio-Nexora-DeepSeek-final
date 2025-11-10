@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================================================
+   OPTIMIZACIÓN 100x - ELIMINACIÓN COMPLETA DE RECUADROS BLANCOS Y OPTIMIZACIÓN DE RENDIMIENTO
+   ============================================================================================================ */
+
+/* 1. RESET COMPLETO DE ELEMENTOS DE FONDO */
+body, html, #__next, #root, #app {
+  background: transparent !important;
+  background-color: transparent !important;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Fondo negro para simular el espacio - Optimizado 100x */
+body {
+  background-color: #000000 !important;
+  background: linear-gradient(135deg, #0a0a0a 0%, #000000 50%, #0a0a0a 100%) !important;
+  overflow-x: hidden;
+}
+
+/* 2. ELIMINAR OVERLAYS BLANCOS COMUNES */
+.background-white,
+.white-background,
+.bg-white,
+.overlay-background,
+.background-overlay,
+.main-background,
+.app-background,
+.container-background,
+.screen-background,
+.page-background,
+.white-frame,
+.unwanted-background,
+.fixed-container {
+  background: transparent !important;
+  background-color: transparent !important;
+  display: none !important;
+}
+
+/* 3. CONTENEDORES PRINCIPALES SUSPECT */
+.main-container,
+.app-container, 
+.page-container,
+.layout-container,
+.root-container,
+#root,
+#app,
+#main,
+main,
+.main,
+.app {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* 4. ELIMINAR SOMBRAS Y BORDES BLANCOS */
+.white-frame,
+.white-border,
+.border-white,
+.shadow-white {
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* 5. ELEMENTOS CON POSICIÓN ABSOLUTE/FIXED */
+.fixed-background,
+.absolute-background,
+.fixed-overlay,
+.absolute-overlay {
+  background: transparent !important;
+}
+
+/* 6. GRADIENTES Y FONDOS COMPLEJOS - Solo si contienen blanco */
+[class*="white-frame"],
+[class*="white-overlay"],
+[class*="white-background"],
+[style*="background: white"],
+[style*="background-color: white"],
+[style*="background: #fff"],
+[style*="background-color: #fff"],
+[style*="background: rgb(255, 255, 255)"],
+[style*="background-color: rgb(255, 255, 255)"] {
+  display: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Optimizar rendimiento 100x */
+* {
+  box-sizing: border-box;
+}
+
+/* Ocultar Vercel Toolbar en producción */
+.vc-toolbar,
+[data-vercel-toolbar],
+#vercel-toolbar {
+  display: none !important;
+}
+
+/* Asegurar que la Vercel Toolbar no aparezca en producción */
+@media (min-width: 1px) {
+  .vc-toolbar,
+  [data-vercel-toolbar],
+  #vercel-toolbar {
+    display: none !important;
+  }
+}
+
+/* Optimización de renderizado - GPU acceleration */
+canvas,
+[class*="three"],
+[class*="earth"],
+[class*="planet"] {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Preload crítico para texturas */
+link[rel="preload"][as="image"] {
+  display: none;
+}
+

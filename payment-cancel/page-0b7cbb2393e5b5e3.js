@@ -1,0 +1,6 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[829],{1548:function(e,n,t){Promise.resolve().then(t.bind(t,7311))},7311:function(e,n,t){"use strict";t.r(n),t.d(n,{default:function(){return c}});var r=t(7437),a=t(7138);/**
+ * @license lucide-react v0.373.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */let l=(0,t(3480).Z)("CircleX",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["path",{d:"m15 9-6 6",key:"1uzhvr"}],["path",{d:"m9 9 6 6",key:"z0biqf"}]]);function c(){return(0,r.jsx)("div",{className:"min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800",children:(0,r.jsxs)("div",{className:"max-w-md w-full bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl text-center",children:[(0,r.jsx)(l,{className:"w-16 h-16 text-red-400 mx-auto mb-4"}),(0,r.jsx)("h1",{className:"text-3xl font-bold mb-2",children:"Payment Cancelled"}),(0,r.jsx)("p",{className:"text-gray-400 mb-6",children:"Your payment was cancelled. You can try again anytime."}),(0,r.jsx)(a.default,{href:"/",className:"inline-block px-6 py-3 bg-blue-500 rounded-lg font-semibold hover:bg-blue-600 transition-all",children:"Return to Home"})]})})}}},function(e){e.O(0,[193,971,23,744],function(){return e(e.s=1548)}),_N_E=e.O()}]);
