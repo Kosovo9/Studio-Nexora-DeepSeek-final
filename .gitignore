@@ -15,9 +15,31 @@ cypress/downloads
 # next.js
 /.next/
 /out/
+.next
+out
 
 # production
 /build
+build
+
+# build artifacts
+*.pack
+*.tsbuildinfo
+*.js.nft.json
+chunks/
+server/
+client-production/
+edge-server-production/
+server-production/
+static/
+pages/
+types/
+media/
+css/
+webpack/
+swc/
+eslint/
+cache/
 
 # misc
 .DS_Store
