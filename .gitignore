@@ -41,6 +41,12 @@ swc/
 eslint/
 cache/
 
+# Compiled JS files in API routes (conflict with .ts files)
+app/api/**/*.js
+app/api/**/*.js.nft.json
+api/**/*.js
+api/**/*.js.nft.json
+
 # misc
 .DS_Store
 *.pem
