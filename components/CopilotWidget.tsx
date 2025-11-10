@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Bot, X, Send, Lightbulb, History } from 'lucide-react'
 import { getTexts, type Language } from '@/lib/i18n'
 
@@ -74,19 +74,7 @@ export default function CopilotWidget({
 
   const t = copilotTexts[language]
 
-  useEffect(() => {
-    // Load chat history
-    loadHistory()
-    // Load suggestions
-    loadSuggestions()
-  }, [])
-
-  useEffect(() => {
-    // Scroll to bottom when new message
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
-
-  const loadHistory = async () => {
+  const loadHistory = useCallback(async () => {
     try {
       const response = await fetch('/api/copilot/history')
       if (response.ok) {
@@ -96,11 +84,23 @@ export default function CopilotWidget({
     } catch (error) {
       console.error('Error loading history:', error)
     }
-  }
+  }, [])
 
-  const loadSuggestions = () => {
+  const loadSuggestions = useCallback(() => {
     setSuggestions(t.tips)
-  }
+  }, [t.tips])
+
+  useEffect(() => {
+    // Load chat history
+    loadHistory()
+    // Load suggestions
+    loadSuggestions()
+  }, [loadHistory, loadSuggestions])
+
+  useEffect(() => {
+    // Scroll to bottom when new message
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
 
   const handleSend = async () => {
     if (!input.trim() || loading) return

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useUser } from '@clerk/nextjs'
 import { BarChart3, TrendingUp, AlertCircle, Users, Clock, Download } from 'lucide-react'
 import AdminPanelButtons from '@/components/AdminPanelButtons'
@@ -26,14 +26,7 @@ export default function Page() {
   const [dateRange, setDateRange] = useState('7d')
   const [language, setLanguage] = useState<'en' | 'es'>('en')
 
-  useEffect(() => {
-    if (isLoaded && user) {
-      setLanguage(getLanguage())
-      fetchMetrics()
-    }
-  }, [isLoaded, user, dateRange])
-
-  const fetchMetrics = async () => {
+  const fetchMetrics = useCallback(async () => {
     try {
       const response = await fetch(`/api/admin/metrics?range=${dateRange}`)
       const data = await response.json()
@@ -43,7 +36,14 @@ export default function Page() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [dateRange])
+
+  useEffect(() => {
+    if (isLoaded && user) {
+      setLanguage(getLanguage())
+      fetchMetrics()
+    }
+  }, [isLoaded, user, fetchMetrics])
 
   const exportLogs = async (format: 'pdf' | 'csv') => {
     try {

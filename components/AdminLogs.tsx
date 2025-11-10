@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 
 interface LogEntry {
   event: string
@@ -16,14 +16,7 @@ export default function AdminLogs() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<string>('')
 
-  useEffect(() => {
-    fetchLogs()
-    // Refresh every 10 seconds
-    const interval = setInterval(fetchLogs, 10000)
-    return () => clearInterval(interval)
-  }, [filter])
-
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     try {
       const url = filter ? `/api/log?event=${filter}&limit=100` : '/api/log?limit=100'
       const response = await fetch(url)
@@ -34,7 +27,14 @@ export default function AdminLogs() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [filter])
+
+  useEffect(() => {
+    fetchLogs()
+    // Refresh every 10 seconds
+    const interval = setInterval(fetchLogs, 10000)
+    return () => clearInterval(interval)
+  }, [fetchLogs])
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString()
