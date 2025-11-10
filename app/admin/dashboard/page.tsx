@@ -19,7 +19,7 @@ interface Metrics {
   errors: number
 }
 
-export default function AdminDashboard() {
+export default function Page() {
   const { user, isLoaded } = useUser()
   const [metrics, setMetrics] = useState<Metrics | null>(null)
   const [loading, setLoading] = useState(true)
@@ -239,7 +239,7 @@ export default function AdminDashboard() {
           </div>
         </div>
       )
-    }
+}
 
 function MetricCard({
   title,

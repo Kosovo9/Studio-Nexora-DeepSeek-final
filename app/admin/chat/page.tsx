@@ -11,7 +11,7 @@ interface Message {
   timestamp: Date
 }
 
-export default function AdminChat() {
+export default function Page() {
   const { user, isLoaded } = useUser()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')

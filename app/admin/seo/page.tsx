@@ -28,7 +28,7 @@ interface KeywordData {
   h1: string
 }
 
-export default function AdminSEO() {
+export default function Page() {
   const { user, isLoaded } = useUser()
   const [language, setLanguage] = useState<Language>('en')
   const [scores, setScores] = useState<SEOScore[]>([])
