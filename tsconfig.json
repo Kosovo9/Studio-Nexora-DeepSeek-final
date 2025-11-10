@@ -40,6 +40,15 @@
   ],
   "exclude": [
     "node_modules",
-    ".next"
+    ".next",
+    "out",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/*.stories.tsx",
+    "**/*.stories.js",
+    "**/*.stories.jsx",
+    "**/*.stories.ts",
+    "**/*.d.ts"
   ]
 }
